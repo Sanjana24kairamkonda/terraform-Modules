@@ -3,13 +3,19 @@ resource "google_compute_global_address" "default" {
 }
 
 resource "google_compute_backend_service" "default" {
-  name                  = "backend-service"
+  name = "backend-service"
   load_balancing_scheme = "EXTERNAL"
-  health_checks         = [google_compute_health_check.default.id]
+
   backend {
-    group = var.instance_group
+    group = google_compute_region_instance_group_manager.mig.instance_group  # ✅ Fix here
+    balancing_mode = "UTILIZATION"
+    capacity_scaler = 1
   }
+
+  health_checks = [google_compute_health_check.default.id]
+  timeout_sec   = 30
 }
+
 
 resource "google_compute_health_check" "default" {
   name = "health-check"
