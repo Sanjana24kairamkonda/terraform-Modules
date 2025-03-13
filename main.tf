@@ -1,12 +1,12 @@
-/*module "instance_group" {
-  source         = "./instance-group"
+module "instance_group" {
+  source         = "./modules/instance-group"
   region         = var.region
   instance_count = var.instance_count
-}*/
+}
 
 module "load_balancer" {
-  source         = "./load-balancer"
-  instance_group = "my-mig"
+  source         = "./modules/load-balancer"
+  instance_group = module.instance_group.instance_group_name
 }
 
 output "load_balancer_ip" {
