@@ -7,7 +7,7 @@ resource "google_compute_backend_service" "default" {
   load_balancing_scheme = "EXTERNAL"
 
   backend {
-    group = google_compute_region_instance_group_manager.mig.instance_group  # ✅ Fix here
+    group = "my-mig"
     balancing_mode = "UTILIZATION"
     capacity_scaler = 1
   }
