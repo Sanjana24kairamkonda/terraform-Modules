@@ -32,8 +32,9 @@ resource "google_compute_region_instance_group_manager" "mig" {
   target_size = var.instance_count
 }
 
-resource "google_compute_autoscaler" "autoscaler" {
+resource "google_compute_region_autoscaler" "autoscaler" {
   name   = "my-autoscaler"
+  region = var.region  # Use region instead of zone
   target = google_compute_region_instance_group_manager.mig.id
 
   autoscaling_policy {
