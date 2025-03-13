@@ -32,6 +32,9 @@ jobs:
         # Set the project for gcloud
         gcloud config set project ${{ secrets.GCP_PROJECT_ID }}
 
+    - name: Destroy Terraform
+      run: terraform destroy
+
     # Step 4: Reinitialize Terraform
     - name: Reinitialize Terraform
       run: terraform init -reconfigure
