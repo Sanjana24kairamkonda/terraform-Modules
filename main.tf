@@ -6,7 +6,7 @@
 
 module "load_balancer" {
   source         = "./load-balancer"
-  instance_group = module.instance_group.instance_group_name
+  instance_group = "my-mig"
 }
 
 output "load_balancer_ip" {
